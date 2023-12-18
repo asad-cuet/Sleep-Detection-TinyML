@@ -131,13 +131,17 @@ void loop() {
   readZFromAccelerometer();
   float x_val = degreesZ;
 
-  Serial.print("x_val");
-  Serial.println(x_val);
+  Serial.print("degreesZ= ");
+  Serial.println(degreesZ);
+
+    Serial.print("enmo");
+  Serial.println(enmo);
 
   delay(2000);
 
   // Place our calculated x value in the model's input tensor
   input->data.f[0] = x_val;
+  input->data.f[1] = enmo;
 
   // Run inference, and report any error
   TfLiteStatus invoke_status = interpreter->Invoke();
@@ -149,10 +153,11 @@ void loop() {
 
   // Read the predicted y value from the model's output tensor
   float y_val = output->data.f[0];
+  float y_val2 = output->data.f[1];
 
   // Output the results. A custom HandleOutput function can be implemented
   // for each supported hardware target.
-  HandleOutput(error_reporter, x_val, y_val);
+  HandleOutput(error_reporter, x_val, y_val,y_val2);
 
   // Increment the inference_counter, and reset it if we have reached
   // the total number per cycle

@@ -26,7 +26,8 @@ bool initialized = false;
 
 // Animates a dot across the screen to represent the current x and y values
 void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value,
-                  float y_value) {
+                  float y_value,
+                  float y_value2) {
   // Do this only once
   if (!initialized) {
     // Set the LED pin to output
@@ -45,6 +46,8 @@ void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value,
   Serial.println(brightness);
   Serial.print("y_value: ");
   Serial.println(y_value);
+  Serial.print("y_value2: ");
+  Serial.println(y_value2);
 
   // Log the current brightness value for display in the Arduino plotter
   TF_LITE_REPORT_ERROR(error_reporter, "%d\n", brightness);
