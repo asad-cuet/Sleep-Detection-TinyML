@@ -35,20 +35,23 @@ void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value,
     initialized = true;
   }
 
-  // Calculate the brightness of the LED such that y=-1 is fully off
-  // and y=1 is fully on. The LED's brightness can range from 0-255.
-  int brightness = (int)(127.5f * (y_value + 1));
 
-  // Set the brightness of the LED. If the specified pin does not support PWM,
-  // this will result in the LED being on when y > 127, off otherwise.
-  analogWrite(led, brightness);
-  Serial.print("Brightness: ");
-  Serial.println(brightness);
-  Serial.print("y_value: ");
+  Serial.print("sleep score: ");
   Serial.println(y_value);
-  Serial.print("y_value2: ");
+  Serial.print("awake score: ");
   Serial.println(y_value2);
 
+  Serial.print("Status: ");
+  if(y_value>=0.7)
+  {
+    Serial.println("Sleeping");
+    delay(5000);
+  }
+  else
+  {
+    Serial.println("Awake");
+  }
+
   // Log the current brightness value for display in the Arduino plotter
-  TF_LITE_REPORT_ERROR(error_reporter, "%d\n", brightness);
+  TF_LITE_REPORT_ERROR(error_reporter, "%d\n", y_value);
 }

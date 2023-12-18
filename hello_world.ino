@@ -121,23 +121,10 @@ void setup() {
 
 // The name of this function is important for Arduino compatibility.
 void loop() {
-  // Calculate an x value to feed into the model. We compare the current
-  // inference_count to the number of inferences per cycle to determine
-  // our position within the range of possible x values the model was
-  // trained on, and use this to calculate a value.
-  float position = static_cast<float>(inference_count) /
-                   static_cast<float>(kInferencesPerCycle);
+  delay(10);
 
   readZFromAccelerometer();
   float x_val = degreesZ;
-
-  Serial.print("degreesZ= ");
-  Serial.println(degreesZ);
-
-    Serial.print("enmo");
-  Serial.println(enmo);
-
-  delay(2000);
 
   // Place our calculated x value in the model's input tensor
   input->data.f[0] = x_val;
