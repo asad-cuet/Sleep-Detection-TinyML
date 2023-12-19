@@ -125,10 +125,10 @@ void loop() {
 
   readZFromAccelerometer();
   float x_val = degreesZ;
-
+  float x_val2=enmo;
   // Place our calculated x value in the model's input tensor
   input->data.f[0] = x_val;
-  input->data.f[1] = enmo;
+  input->data.f[1] = x_val2;
 
   // Run inference, and report any error
   TfLiteStatus invoke_status = interpreter->Invoke();
@@ -144,7 +144,7 @@ void loop() {
 
   // Output the results. A custom HandleOutput function can be implemented
   // for each supported hardware target.
-  HandleOutput(error_reporter, x_val, y_val,y_val2);
+  HandleOutput(error_reporter, x_val,x_val2, y_val,y_val2);
 
   // Increment the inference_counter, and reset it if we have reached
   // the total number per cycle
