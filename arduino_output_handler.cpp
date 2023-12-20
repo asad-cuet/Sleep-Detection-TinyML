@@ -72,19 +72,23 @@ void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value,float x_v
 
   lcd.setCursor(4, 3); 
   lcd.print("Status:");
-  lcd.setCursor(12, 3);  
+    
  
   Serial.print("Status: ");
   if(y_value>=0.65)
   {
-    Serial.println("Sleeping");
+    Serial.println("Sleep");
+    lcd.setCursor(12, 3);
     Serial.println("        ");
-    lcd.print("Sleeping");
+    lcd.setCursor(12, 3);
+    lcd.print("Sleep");
     delay(5000);
   }
   else
   {
+    lcd.setCursor(12, 3);
     Serial.println("        ");
+    lcd.setCursor(12, 3);
     Serial.println("Awake");
     lcd.print("Awake");
   }
